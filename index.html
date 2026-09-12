@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>학교 선택 도우미</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <!-- 첫 번째 화면: 나이 입력 -->
+        <div id="screen1" class="screen active">
+            <div class="card">
+                <h1>학교 선택 도우미</h1>
+                <p class="subtitle">당신의 미래를 함께 준비해보세요</p>
+                
+                <div class="form-group">
+                    <label for="age">나이를 입력해주세요:</label>
+                    <input type="number" id="age" min="10" max="50" placeholder="예: 17">
+                    <p class="error-message" id="ageError"></p>
+                </div>
+                
+                <button class="btn btn-primary" onclick="nextScreen1()">다음</button>
+            </div>
+        </div>
+
+        <!-- 두 번째 화면: 선택 유형 -->
+        <div id="screen2" class="screen">
+            <div class="card">
+                <h1>어떤 고민이 있으신가요?</h1>
+                <p class="subtitle">해당하는 옵션을 선택해주세요</p>
+                
+                <div class="options">
+                    <button class="option-btn" onclick="selectType('highschool')">
+                        <span class="icon">🏫</span>
+                        <span class="label">고등학교 선택</span>
+                    </button>
+                    
+                    <button class="option-btn" onclick="selectType('university')">
+                        <span class="icon">🎓</span>
+                        <span class="label">대학교 선택</span>
+                    </button>
+                    
+                    <button class="option-btn" onclick="selectType('interest')">
+                        <span class="icon">💡</span>
+                        <span class="label">관심 분야 탐색</span>
+                    </button>
+                </div>
+                
+                <button class="btn btn-secondary" onclick="prevScreen()">이전</button>
+            </div>
+        </div>
+
+        <!-- 세 번째 화면: 고등학교 과목 점수 -->
+        <div id="screen3" class="screen">
+            <div class="card">
+                <h1>고등학교 과목별 점수</h1>
+                <p class="subtitle">각 과목의 점수를 입력해주세요 (0~100)</p>
+                
+                <div class="form-group">
+                    <label for="korean">국어:</label>
+                    <input type="number" id="korean" min="0" max="100" placeholder="0~100">
+                </div>
+                
+                <div class="form-group">
+                    <label for="math">수학:</label>
+                    <input type="number" id="math" min="0" max="100" placeholder="0~100">
+                </div>
+                
+                <div class="form-group">
+                    <label for="english">영어:</label>
+                    <input type="number" id="english" min="0" max="100" placeholder="0~100">
+                </div>
+                
+                <div class="form-group">
+                    <label for="science">과학:</label>
+                    <input type="number" id="science" min="0" max="100" placeholder="0~100">
+                </div>
+                
+                <div class="form-group">
+                    <label for="social">사회:</label>
+                    <input type="number" id="social" min="0" max="100" placeholder="0~100">
+                </div>
+                
+                <p class="error-message" id="hsError"></p>
+                
+                <button class="btn btn-primary" onclick="submitHighSchool()">결과 보기</button>
+                <button class="btn btn-secondary" onclick="prevScreen()">이전</button>
+            </div>
+        </div>
+
+        <!-- 네 번째 화면: 대학교 성적 및 수능 등급 -->
+        <div id="screen4" class="screen">
+            <div class="card">
+                <h1>대학교 성적 및 수능 정보</h1>
+                <p class="subtitle">고등학교 성적과 수능 등급을 입력해주세요</p>
+                
+                <h3>고등학교 성적 (등급: 1~9)</h3>
+                
+                <div class="form-group">
+                    <label for="univ-korean">국어:</label>
+                    <input type="number" id="univ-korean" min="1" max="9" placeholder="1~9">
+                </div>
+                
+                <div class="form-group">
+                    <label for="univ-math">수학:</label>
+                    <input type="number" id="univ-math" min="1" max="9" placeholder="1~9">
+                </div>
+                
+                <div class="form-group">
+                    <label for="univ-english">영어:</label>
+                    <input type="number" id="univ-english" min="1" max="9" placeholder="1~9">
+                </div>
+                
+                <h3>수능 과목별 등급 (1~9)</h3>
+                
+                <div class="form-group">
+                    <label for="sat-korean">수능 국어:</label>
+                    <input type="number" id="sat-korean" min="1" max="9" placeholder="1~9">
+                </div>
+                
+                <div class="form-group">
+                    <label for="sat-math">수능 수학:</label>
+                    <input type="number" id="sat-math" min="1" max="9" placeholder="1~9">
+                </div>
+                
+                <div class="form-group">
+                    <label for="sat-english">수능 영어:</label>
+                    <input type="number" id="sat-english" min="1" max="9" placeholder="1~9">
+                </div>
+                
+                <div class="form-group">
+                    <label for="sat-subject">수능 탐구/과학:</label>
+                    <input type="number" id="sat-subject" min="1" max="9" placeholder="1~9">
+                </div>
+                
+                <p class="error-message" id="univError"></p>
+                
+                <button class="btn btn-primary" onclick="submitUniversity()">결과 보기</button>
+                <button class="btn btn-secondary" onclick="prevScreen()">이전</button>
+            </div>
+        </div>
+
+        <!-- 다섯 번째 화면: 관심 분야 심리 분석 -->
+        <div id="screen5" class="screen">
+            <div class="card">
+                <h1>관심 분야 심리 분석</h1>
+                <p class="subtitle">당신의 관심 분야를 파악해보세요</p>
+                
+                <div class="question">
+                    <p>1. 새로운 것을 배우거나 문제를 풀 때 어떤 느낌이 드나요?</p>
+                    <div class="radio-group">
+                        <label><input type="radio" name="q1" value="analytical"> 논리적이고 체계적으로 접근하는 게 좋다</label>
+                        <label><input type="radio" name="q1" value="creative"> 창의적이고 자유롭게 생각하는 게 좋다</label>
+                        <label><input type="radio" name="q1" value="social"> 사람들과 함께 협력하는 게 좋다</label>
+                    </div>
+                </div>
+                
+                <div class="question">
+                    <p>2. 업무를 할 때 가장 중요한 것은?</p>
+                    <div class="radio-group">
+                        <label><input type="radio" name="q2" value="analytical"> 정확성과 효율성</label>
+                        <label><input type="radio" name="q2" value="creative"> 혁신과 표현</label>
+                        <label><input type="radio" name="q2" value="social"> 인간관계와 도움</label>
+                    </div>
+                </div>
+                
+                <div class="question">
+                    <p>3. 여가 시간에 주로 뭘 하나요?</p>
+                    <div class="radio-group">
+                        <label><input type="radio" name="q3" value="analytical"> 책을 읽거나 데이터를 분석한다</label>
+                        <label><input type="radio" name="q3" value="creative"> 미술, 음악, 글쓰기 등을 한다</label>
+                        <label><input type="radio" name="q3" value="social"> 친구들과 만나거나 봉사를 한다</label>
+                    </div>
+                </div>
+                
+                <div class="question">
+                    <p>4. 스트레스를 받을 때 주로 어떻게 해결하나요?</p>
+                    <div class="radio-group">
+                        <label><input type="radio" name="q4" value="analytical"> 원인을 분석하고 계획을 세운다</label>
+                        <label><input type="radio" name="q4" value="creative"> 자유로운 활동으로 기분을 환기한다</label>
+                        <label><input type="radio" name="q4" value="social"> 누군가와 대화하며 풀어낸다</label>
+                    </div>
+                </div>
+                
+                <div class="question">
+                    <p>5. 미래의 직업에서 원하는 것은?</p>
+                    <div class="radio-group">
+                        <label><input type="radio" name="q5" value="analytical"> 전문 지식을 활용하고 성과를 내는 것</label>
+                        <label><input type="radio" name="q5" value="creative"> 새로운 것을 만들고 표현하는 것</label>
+                        <label><input type="radio" name="q5" value="social"> 사람들을 도우며 의미 있는 일을 하는 것</label>
+                    </div>
+                </div>
+                
+                <button class="btn btn-primary" onclick="submitInterest()">결과 보기</button>
+                <button class="btn btn-secondary" onclick="prevScreen()">이전</button>
+            </div>
+        </div>
+
+        <!-- 결과 화면 -->
+        <div id="resultScreen" class="screen">
+            <div class="card">
+                <h1>결과</h1>
+                <div id="resultContent"></div>
+                
+                <button class="btn btn-primary" onclick="restartApp()">처음부터 시작</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
