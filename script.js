@@ -82,7 +82,7 @@ function submitHighSchool() {
     const average = (korean + math + english + science + social) / 5;
     const result = getHighSchoolResult(average, korean, math, english);
     
-    showResult(`고등학교 선택 결과`, result, average);
+    showResult('🏫 고등학교 선택 결과', result, average);
 }
 
 // 대학교 선택 결과 제출
@@ -115,7 +115,7 @@ function submitUniversity() {
     const satAverage = (satKorean + satMath + satEnglish + satSubject) / 4;
     const result = getUniversityResult(univAverage, satAverage, univMath, satMath);
     
-    showResult(`대학교 선택 결과`, result, univAverage);
+    showResult('🎓 대학교 선택 결과', result, univAverage);
 }
 
 // 관심 분야 심리 분석 제출
@@ -134,7 +134,7 @@ function submitInterest() {
     }
     
     const result = getInterestResult(answers);
-    showResult(`관심 분야 분석 결과`, result, null);
+    showResult('💡 관심 분야 분석 결과', result, null);
 }
 
 // 고등학교 추천 로직
@@ -198,7 +198,7 @@ function getUniversityResult(univAverage, satAverage, univMath, satMath) {
     
     return `
         <div class="result-item">
-            <h4>📚 성적 분석</h4>
+            <h4>📈 성적 분석</h4>
             <p><strong>고등학교 평균 등급:</strong> ${univAverage.toFixed(1)}등급</p>
             <p><strong>수능 평균 등급:</strong> ${satAverage.toFixed(1)}등급</p>
             <p><strong>수준:</strong> ${level}</p>
@@ -244,13 +244,13 @@ function getInterestResult(answers) {
     
     return `
         <div class="result-item">
-            <h4>💭 성향 분석</h4>
+            <h4>🧠 성향 분석</h4>
             <p>${description}</p>
             <p><strong>주요 성향:</strong> ${primaryType === 'analytical' ? '분석형' : primaryType === 'creative' ? '창의형' : '사회형'}</p>
             <p><strong>부수 성향:</strong> ${secondaryType === 'analytical' ? '분석형' : secondaryType === 'creative' ? '창의형' : '사회형'}</p>
         </div>
         <div class="result-item">
-            <h4>👨‍💼 추천 직업</h4>
+            <h4>💼 추천 직업</h4>
             <p>${jobs.join(', ')}</p>
         </div>
         <div class="result-item">
